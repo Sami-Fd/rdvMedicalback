@@ -18,11 +18,12 @@ export class AppointementService {
     //console.log("createAppointementDto",createAppointementDto.doctor_schedule_id);
     //createAppointementDto.appointment_number = 1;
     const timeSlot:any = {timeSlot: createAppointementDto.doctor_schedule_id.timeSlot};
+    console.log("appointment",createAppointementDto);
     try {
       const appointement = await this.appointementModel.create({...createAppointementDto, patient_id: patient[0]._id});
       if (appointement) {
         const scheduleUpdate = await this.doctorScheduleService.update(createAppointementDto.doctor_schedule_id._id, timeSlot);
-        //console.log(scheduleUpdate);
+        console.log("from scheduleupdate",scheduleUpdate);
       }
       return {appointement: appointement, message: 'appointement created successfully'};
     } catch (error) {

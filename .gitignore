@@ -3,6 +3,8 @@ test.http
 # compiled output
 /dist
 /node_modules
+/public
+/uploads
 
 # Logs
 logs

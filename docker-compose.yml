@@ -2,11 +2,16 @@
 version: '3.1'
 
 services:
-
+  webapp:
+    image: .
+    ports:
+      - 3000:3000
+    environment:
+      - DATABASE_URL=mongodb://mongo:27017/appointement
   mongo:
     image: mongo
     restart: always
     environment:
-      - MONGODB_DATABASE="appointement"
+      - DATABASE_URL=mongodb://mongo:27017/appointement
     ports:
       - 27017:27017

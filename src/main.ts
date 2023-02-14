@@ -6,6 +6,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 
 
 async function bootstrap() {
+  console.log("env ", process.env)
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.enableCors();
   app.setGlobalPrefix('api');

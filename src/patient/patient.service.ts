@@ -21,7 +21,7 @@ export class PatientService {
     patient.user =  user;
     patient.password = hashedPassword;
     if (file) {
-      patient.image = file.path;
+      patient.image = file.filename;
     }
     console.log(file.path)
     

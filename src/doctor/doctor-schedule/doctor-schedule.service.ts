@@ -78,14 +78,14 @@ export class DoctorScheduleService {
 
   async update(id: string, updateDoctorScheduleDto: any) {
     try {
-      console.log("from schedule",id,updateDoctorScheduleDto);
+      //console.log("from schedule",id,updateDoctorScheduleDto);
       //create time slot array
       if(updateDoctorScheduleDto.doctor_schedule_date){
         updateDoctorScheduleDto.timeSlot = await this.timeSlotGenerator(updateDoctorScheduleDto.doctor_schedule_start_time, updateDoctorScheduleDto.doctor_schedule_end_time, updateDoctorScheduleDto.average_consulting_time);
       }
-      console.log("from after timeslot",updateDoctorScheduleDto);
+      //console.log("from after timeslot",updateDoctorScheduleDto);
       const schedule = await this.doctorScheduleModel.findByIdAndUpdate(id, updateDoctorScheduleDto, {new:true});
-      console.log("from after update",schedule);
+      //console.log("from after update",schedule);
       return {data:schedule, message:'Doctor Schedule updated successfully'};
     } catch (error) {
       return {message:'Doctor Schedule not found'};

@@ -55,6 +55,11 @@ export class DoctorScheduleService {
          }
       },
       {
+        "$sort": {
+          "doctor_schedule_date": 1
+        }
+      },
+      {
         "$lookup": {
           "from": "doctors",
           "localField": "doctor_id",
@@ -62,7 +67,22 @@ export class DoctorScheduleService {
           "as": "doctor"
         }
       },
-    ]);  
+      //groupe by doctor_schedule_date if doctor_id is same
+      {
+        "$group": {
+          "_id": "$doctor_id",
+          "doctor_schedule_id": {"$push":"$_id"},
+          "doctor_schedule_date": { "$push": "$doctor_schedule_date" },
+          //"doctor_schedule_start_time": { "$push": "$doctor_schedule_start_time" },
+          //"doctor_schedule_end_time": { "$push": "$doctor_schedule_end_time" },
+          //"average_consulting_time": { "$push": "$average_consulting_time" },
+          //"doctor_schedule_status": { "$push": "$doctor_schedule_status" },
+          "timeSlot": { "$push": "$timeSlot" },
+          "doctor": { "$first": "$doctor" }
+        }
+      },
+    ]);
+    //console.log("from schedule",schedules);    
     return {data:schedules, message:'Doctor Schedules found successfully'};
   }
 

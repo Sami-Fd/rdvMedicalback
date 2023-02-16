@@ -17,6 +17,7 @@ export class AppointementService {
     const patient = await this.patientService.find({user: req.user._id})
     //console.log("createAppointementDto",createAppointementDto.doctor_schedule_id);
     //createAppointementDto.appointment_number = 1;
+    console.log("createAppointementDto",createAppointementDto);
     const timeSlot:any = {timeSlot: createAppointementDto.doctor_schedule_id.timeSlot};
     console.log("appointment",createAppointementDto);
     try {
